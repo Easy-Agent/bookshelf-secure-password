@@ -174,7 +174,7 @@ describe('bookshelf-secure-password', function () {
           return model.authenticate('testing').then((model) => {
             expect(false).to.be.true
           }, (err) => {
-            expect(err).to.be.defined
+            expect(err).not.to.be.undefined
             expect(err).to.be.an.instanceof(PasswordMismatchError)
             expect(err.name).to.equal('PasswordMismatchError')
           })
@@ -188,7 +188,7 @@ describe('bookshelf-secure-password', function () {
 
         it('resolves the Model if the password matches', function () {
           return model.authenticate('testing').then((model) => {
-            expect(model).to.be.defined
+            expect(model).not.to.be.undefined
           }, (err) => {
             expect(err).to.be.undefined
           })
@@ -198,7 +198,7 @@ describe('bookshelf-secure-password', function () {
           return model.authenticate('invalid').then((model) => {
             expect(false).to.be.true
           }, (err) => {
-            expect(err).to.be.defined
+            expect(err).not.to.be.undefined
             expect(err).to.be.an.instanceof(PasswordMismatchError)
             expect(err.name).to.equal('PasswordMismatchError')
           })
@@ -206,9 +206,9 @@ describe('bookshelf-secure-password', function () {
 
         it('rejects with a PasswordMismatchError if the no password is provided', function () {
           return model.authenticate().then((model) => {
-            expect(model).to.be.defined
+            expect(model).not.to.be.undefined
           }, (err) => {
-            expect(err).to.be.defined
+            expect(err).not.to.be.undefined
             expect(err).to.be.an.instanceof(PasswordMismatchError)
             expect(err.name).to.equal('PasswordMismatchError')
           })
@@ -224,7 +224,7 @@ describe('bookshelf-secure-password', function () {
         try {
           return model.authenticate('testing')
         } catch (err) {
-          expect(err).to.be.defined
+          expect(err).not.to.be.undefined
           expect(err).to.be.an.instanceof(TypeError)
         }
       })
